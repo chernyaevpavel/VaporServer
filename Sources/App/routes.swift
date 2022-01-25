@@ -5,10 +5,13 @@ func routes(_ app: Application) throws {
     app.get { req in
         return req.view.render("index", ["title": "Hello Vapor!"])
     }
-
+    
     app.get("hello") { req -> String in
         return "Hello, world!"
     }
-
+    
+    let controller = AuthController()
+    app.post("register", use: controller.register)
+    
     try app.register(collection: TodoController())
 }
